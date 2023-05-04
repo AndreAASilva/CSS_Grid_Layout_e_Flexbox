@@ -1,0 +1,174 @@
+*{
+    margin:0px;
+    padding: 0px;
+    list-style: none;
+    font-size: 1.2rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    margin-bottom: 100px;
+}
+
+a{
+    text-decoration: none;
+    color:white;
+}
+
+h1{
+    text-align: center;
+    margin-top: 100px;
+}
+
+img{
+    display: block; 
+    max-width: 100%; /*Garante que as imagens fiquem com o tamanho máximo do container e não ultrapasse o limite gerando scroll*/
+}
+
+.header{
+    background-color: #1d1e20;
+    display:flex;
+    flex-wrap: wrap; /*Posiciona os itens um sobre o outro quando a tela diminuir*/
+    justify-content: space-between;
+    align-items:center ;
+    padding: 20px;
+}
+
+.menu{
+    display: flex;
+}
+
+.menu li{
+    margin-left: 18px;
+}
+
+.menu li a {
+    display: block; 
+    padding: 10px;
+}
+
+
+/*CSS FLEXBOX 1*/
+
+.flex{
+    display:flex;
+    flex-wrap: wrap; /*Forçando os itens para baixo com a diminuição da tela*/
+    max-width: 800px; /*Largura máxima da section*/
+    margin: 0 auto; /*Centralizando os itens na section*/
+
+}
+
+.flex > div{
+    flex: 1 1 200px; /*Definido o limite mínimo de 200px de largura*/
+    margin: 10px;
+}
+
+/*CSS GRID 1*/
+
+.grid1{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr ; /*Distribundo o grid em 3 colunas com medidas exatas para cada, dessa forma com 1fr eu deixo mais ou menos cada coluna com aproximadamente 33% cada. Pode alterar os valores conforme a necessidade dos tamanos de cada grid e quantidade também. Obs.: Podemos inserir o repeat(3, 1fr) já que as medidas são iguais */
+    max-width: 800px; 
+    padding: 10px;
+    margin: 0 auto;
+    grid-gap: 20px; /*Espaçamento entre os elementos*/
+
+}
+
+/*Utilizando o nth-child eu posso estilizar neste caso a partir do grid informado ou caso queira, informar um determindado grid inserindo apenas sua posição pelo número dela*/
+.grid1 > div:nth-child(n+4){
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    align-items: center;
+}
+
+
+.grid1 > div.anuncio{ /*Ajustando o anuncio*/
+    grid-column: 1; /*Definindo em qual coluna ficará posicionado o anúncio*/
+    grid-row: 2 / 5; /*Definindo em qual altura em linhas ele irá ocupar*/
+    display: block;
+}
+
+@media(max-width:600px){
+    .grid1{
+        grid-template-columns:repeat(2, 1fr); /*Diminuindo para duas colunas com telas menores*/
+    }
+
+    .grid1 > div:nth-child(n+4){
+        display: block; /*Ajustando os objetos com legenda para telas menores*/
+    }
+
+    .grid1 > div.anuncio{
+        grid-column: auto;
+        grid-row: auto;
+        order:calc(-1); /*Dessa forma modificamos a orndem onde o anuncio se encontra inicialmente, antes de inserir o order ele foi para a última posição, após o order ele passou para a primeira prosição*/
+    }
+}
+
+/*CSS GRID 2*/
+
+.grid2{
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    grid-gap:20px;
+    max-width: 800px;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.sidebar >div{
+    margin-bottom: 10px;
+}
+
+@media(max-width: 600px){
+    .grid2{
+        grid-template-columns: 1fr;
+    }
+    
+    .sidebar{
+        display: flex;
+        overflow: scroll;
+    }
+
+    .sidebar >div{
+        flex: 1 0 200px;
+        margin: 0 10px;
+    }
+}
+
+/*SECTION GRID 3*/
+
+.grid3{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    margin: 0 auto;
+    padding: 10px;
+    max-width: 800px;
+}
+
+.grid3-item:nth-child(1){
+    grid-row: 1 / 3;
+}
+
+.grid3-item{
+    display: grid;
+}
+
+.grid3-item img{
+    grid-column: 1;
+    grid-row: 1/3; /*Alinhando a imagem com o texto*/
+    align-self: end; /*Quando a tela diminui a barra sobe um pouco da parte inferior da imagem e por isso utilizamos o align-self: end para fixa ela na parte inferior. O align-self deve ser usado tanto na imagem como neste caso no P*/
+}
+
+.grid3-item p {
+    background: rgb(0,0,0,0.6);
+    padding: 10px;
+    color: white;
+    /*Posicionando o item no mesmo grid-column: 1*/
+    grid-column: 1;
+    grid-row:2; /*Alinhando o texto na imagem, dessa forma ele vai ficar fixado por cima dela que é o desejado neste caso*/
+    align-self: end; /*Quando a tela diminui a barra sobe um pouco da parte inferior da imagem e por isso utilizamos o align-self: end para fixa ela na parte inferior. O align-self deve ser usado tanto na imagem como neste caso no P*/
+
+}
